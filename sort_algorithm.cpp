@@ -106,10 +106,19 @@ class Sort{
               //cout << pos << endl;
               return pos;     //return the place that the pivotoal element stands at
           }
-          void radix_sort(T arr[], int length){
+          void radix_sort(int arr[], int length){
               
           }
           
+          int max(int arr[], int length){
+              int maxV = arr[0];
+              for(int i=1;i < length; i++){
+                  if(maxV < arr[i]){
+                      maxV = arr[i];
+                  }
+              }
+              return maxV;
+          }
           void swap(T& a, T& b){
               T temp; //exchange values
               temp = a;
