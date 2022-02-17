@@ -120,7 +120,7 @@ class Sort{
                   list<int>::const_iterator pos;
                   for(int i=0; i < radix; i++){
                       for(pos=plist[i].begin();pos!=plist[i].end();pos++){
-                          arr[index++]=*pos;
+                          arr[index++]=*pos; //collect
                       }
                   }
                   for(int i=0;i<radix;i++){
@@ -129,7 +129,7 @@ class Sort{
               }
           }
           
-          int max(int arr[], int length){
+          int max(int arr[], int length){//return the maximum value in an array
               int maxV = arr[0];
               for(int i=1;i < length; i++){
                   if(maxV < arr[i]){
