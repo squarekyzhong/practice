@@ -120,11 +120,12 @@ class Sort{
                   list<int>::const_iterator pos;
                   for(int i=0; i < radix; i++){
                       for(pos=plist[i].begin();pos!=plist[i].end();pos++){
-                          arr[index]=*pos;
-                          index++;
+                          arr[index++]=*pos;
                       }
                   }
-                  plist->clear();
+                  for(int i=0;i<radix;i++){
+                      plist[i].clear();
+                  }
               }
           }
           
@@ -155,10 +156,10 @@ int main()
     //sort.select_sort(arr, 7);
     //sort.merge_sort(arr, 7);
     //sort.quick_sort(arr, 7);// (4231 6 87), (1234) (6 87), ()
-    sort.radix_sort(arr, 7, 10);
+    sort.radix_sort(arr2, 7, 10);
     cout << endl;
     for(int i =0; i < sizeof(arr)/sizeof(arr[0]); i++){
-        cout << arr[i] <<' ';
+        cout << arr2[i] <<' ';
     }
     return 0;
 }
