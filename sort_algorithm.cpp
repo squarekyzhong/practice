@@ -6,7 +6,7 @@
 //
 
 #include <iostream>
-
+#include<list>
 using namespace std;
 template<typename T>
 class Sort{
@@ -106,8 +106,26 @@ class Sort{
               //cout << pos << endl;
               return pos;     //return the place that the pivotoal element stands at
           }
-          void radix_sort(int arr[], int length){
-              
+          void radix_sort(int arr[], int length, int radix){
+              int maxV = max(arr, length); //get the maximum value
+              int divideNum = 1;
+              list<int> *plist = new list<int>[radix];
+              while(maxV > 0){//the number of the loop determined by the number of digits in the maximum value
+                  for(int i=0; i < length;i++){
+                      plist[(arr[i]/divideNum)%radix].push_back(arr[i]);//distribution
+                  }
+                  divideNum*=radix;
+                  maxV/=divideNum; //sorting with different digits in a number
+                  int index = 0; //used by the array to collect the sorted numbers according to digits
+                  list<int>::const_iterator pos;
+                  for(int i=0; i < radix; i++){
+                      for(pos=plist[i].begin();pos!=plist[i].end();pos++){
+                          arr[index]=*pos;
+                          index++;
+                      }
+                  }
+                  plist->clear();
+              }
           }
           
           int max(int arr[], int length){
@@ -131,11 +149,13 @@ int main()
    
     Sort<int> sort;
     int arr[] ={7,4, 2, 3, 1, 8, 6};
+    int arr2[] = {45, 32, 111, 55, 75, 23, 9867};
     cout << "sort an array with 5 different algorithms" << endl;
     //sort.bubble_sort(arr, 7);
     //sort.select_sort(arr, 7);
     //sort.merge_sort(arr, 7);
-    sort.quick_sort(arr, 7);// (4231 6 87), (1234) (6 87), ()
+    //sort.quick_sort(arr, 7);// (4231 6 87), (1234) (6 87), ()
+    sort.radix_sort(arr, 7, 10);
     cout << endl;
     for(int i =0; i < sizeof(arr)/sizeof(arr[0]); i++){
         cout << arr[i] <<' ';
