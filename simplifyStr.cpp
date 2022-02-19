@@ -30,7 +30,7 @@ class stack{
               if(i>0){
                 int ret = arr[i];
                 i--;
-                return ret;  
+                return ret;
               }
               else{
                   return -1;
@@ -41,7 +41,7 @@ class stack{
 string simplifyStr(string str);
 int main()
 {
-    string str = "aabbcccddd";
+    string str = "aabbcccddde";
     str = simplifyStr(str);
     cout << str <<endl;
     return 0;
@@ -50,18 +50,22 @@ string simplifyStr(string str){
     size_t len = str.size();
     string simpStr="";
     size_t count=1;
+    char last=str.at(0);
     for(int i=1; i < len;i++){
-        if(str.at(i)==str.at(i-1)){//the preceding one is the same as the later one.
+        if(str.at(i)==last){//the preceding one is the same as the later one.
             count++; //count how many similar characters in a row;
         }
         else{//they are not equal, and thus begining from 1.
-            simpStr+=str.at(i-1);
+            simpStr+=last;
             simpStr+=to_string(count);
             //cout<<simpStr<<endl;
+            last = str.at(i);
             count=1;
         }
     }
-    if(simpStr.size()>=str.size())//if the simplied one never be short, give up. 
+    simpStr+=last;
+    simpStr+=to_string(count);
+    if(simpStr.size()>=str.size())//if the simplied one never be short, give up.
         return str;
     return simpStr;
 }
