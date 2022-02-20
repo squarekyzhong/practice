@@ -34,7 +34,11 @@ class Stack{
            bool push(T data){
                if(len+1>max){
                    max += incre;
-                   arr = new T[max];
+                   T* temp = new T[max];
+                   for(int i=0; i < len;i++){
+                       temp[i] = arr[i];
+                   }
+                   arr = temp;
                }
                len++;
                arr[len-1] = data;
