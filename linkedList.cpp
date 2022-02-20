@@ -17,61 +17,94 @@ class linkedList{
                Node* prev;
                Node* next;
     };
-    
     private:
            Node *head =NULL;
-           Node *curr = NULL;
-           int len = 0;
+           Node *tail = NULL;
+           int len=0;
     public:
            void insert(T data){
-               if(head=NULL){
-                  Node node = new Node();
-                  node.data = data;
-                  node.prev = NULL;
-                  head = &node;
-                  curr = &node;
+               if(head==NULL){
+                  Node* node =new Node;
+                  node->data = data;
+                  node->prev = NULL;
+                  node->next=NULL;
+                  head = node;
+                  tail = node;
                   len++;
                }
                else{
-                    Node node = new Node();
-                    node.data = data;
-                    node.prev = curr;
-                    curr->next = &node;
-                    curr = &node;
+                    Node* node = new Node;
+                    node->data = data;
+                    node->prev = tail;
+                    node->next = NULL;
+                    tail->next = node;
+                    tail = node;
                     len++;
                }
            }
-           bool deleteNode(int pos){
-               if(head==NULL||size()<pos)
+           void insertFromArray(T arr[], size_t len){
+                for(int i=0; i < len;i++){
+                    insert(arr[i]);
+                }
+           }
+           bool deleteNode(int pos){//delete certain node
+               if(head==NULL||size()<pos)//list is null or pos > size of the list, return error
                     return false;
                Node* pNode=head;
                int num=0;
-               while(pNode->next&&num<pos){
-                    pNode = pNode->next;   
+               while(pNode&&num < pos){//point to the deleting node
                     num++;
+                    pNode = pNode->next;
                }
+               if(pNode==tail){
+                   deleteFinalNode();
+               }
+               else{
                pNode->prev->next = pNode->next;//pNode's previous node points to pNode's next node
                pNode->next->prev = pNode->prev; //pNode's next node points to pNode's previous node
-           
+               pNode = NULL;
+               len--;
+               }
                return true;
            }
            bool deleteFinalNode(){
                if(head==NULL)
                    return false;
-               (head+size()-2)->next =NULL; 
+               tail->prev->next = NULL;
+               tail = tail->prev;
+               len--;
                return true;
+           }
+           void showList(){
+               Node* pNode;
+               pNode = head;
+               while(pNode){
+                   cout << pNode->data <<endl;
+                   pNode = pNode->next;
+               }
            }
            int size(){
                return len;
            }
            
-          
 };
 
 int main()
 {
-    string str1 ="waterbottle";
-    string str2="erbottlewat";
+    linkedList<int> l;
+    l.insert(0);
+    l.insert(1);
+    l.insert(2);
+    l.insert(3);
+    l.insert(4);
+    l.showList();
+    l.deleteFinalNode();
+    l.showList();
+    int arr[5]={4, 5, 6, 7, 8};
+    l.insertFromArray(arr,5);
+    l.showList();
+    l.deleteNode(7);
+    l.showList();
     return 0;
 }
 
