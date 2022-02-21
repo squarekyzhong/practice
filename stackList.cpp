@@ -19,7 +19,7 @@ class stackList{
           int last_stack = -1;
           int incre = 10; //if all of stacks are full, increment the num_of_stack by 10
           int capacity = 10;//each stack can store 10 elements
-          int* size; // num of elements in each stack 
+          int* size; // num of elements in each stack
     public://push, pop, top, size, empty, min
           stackList(){
               st =  new stack<T>[num_of_stack];
@@ -39,7 +39,7 @@ class stackList{
                          stack<T> *temp = new stack<T>[num_of_stack+incre];//expand the stack array
                          int* sz = new int[num_of_stack+incre];
                          for(int i=0; i < num_of_stack; i++){//walk through all stacks
-                                temp[i] = st[i]; //copy all pointers in st to temp
+                                temp[i] = st[i]; //copy all stack variables in st to temp
                                 sz[i] = size[i]; //copy num of elements in each stack to sz
                          }
                          st = temp;
@@ -64,18 +64,25 @@ class stackList{
           }
           void pop(){
               int last = getLastStack();
-              cout << last << endl;
+              cout << "last stack " << last << endl;
+              cout << "size of last stack " << size[last] << endl;
               if(last==-1 || !st){
                   cout << "stack is empty" << endl;
               }
-              else if(!size[last]){//not empty
+              else if(size[last]){//the last stack is not empty
+                  cout <<"poped element " << st[last].top() << endl;
                   st[last].pop();
                   size[last]--;
               }
-              else{
+              else{//the last stack is empty
                   if(last-1 >= 0){
                     last--;
+                    cout << "poped element ";
+                    cout << st[last].top() << endl;
+                    cout <<"size of last stack before pop " << size[last] << endl;
                     st[last].pop();
+                    size[last]--;
+                    cout <<"size of last stack after pop " << size[last] << endl;
                     last_stack = last;
                   }
                   else{
@@ -85,7 +92,6 @@ class stackList{
           }
           
           int getLastStack(){
-              cout <<"last_stack" << last_stack << endl;
               return last_stack;
           }
           
@@ -93,8 +99,12 @@ class stackList{
 
 template<typename T> void printElement(stackList<T> st);
 int main()
-{ 
+{
     stackList<int> st;
+    for(int i=0; i < 101; i++){
+        st.push(i);
+    }
+    st.pop();
     st.pop();
     return 0;
 }
