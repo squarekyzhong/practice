@@ -20,6 +20,7 @@ class stackList{
           int incre = 10; //if all of stacks are full, increment the num_of_stack by 10
           int capacity = 10;//each stack can store 10 elements
           int* size; // num of elements in each stack
+          
     public://push, pop, top, size, empty, min
           stackList(){
               st =  new stack<T>[num_of_stack];
@@ -95,19 +96,32 @@ class stackList{
               return last_stack;
           }
           
+          int* getSizeArr(){
+              return size;
+          }
+          
+          stack<T> * getStackPointer(){
+              return st;
+          }
 };
 
 template<typename T> void printElement(stackList<T> st);
 int main()
 {
     stackList<int> st;
-    for(int i=0; i < 101; i++){
+    for(int i=0; i < 201; i++){
         st.push(i);
     }
-    st.pop();
-    st.pop();
+    printElement(st);
     return 0;
 }
 template<typename T> void printElement(stackList<T> st){
+          cout <<"st.getLastStack() " << st.getLastStack() << endl;
+          cout << "st.getSizeArr()[st.getLastStack] " << st.getSizeArr()[st.getLastStack()] << endl;
           
+          for(int i = st.getLastStack(); i>=0;i--){//the num of stack that contains elements
+              for(int j=st.getSizeArr()[i]; j > 0 ; j--){ // the size for each stack
+                  st.pop();
+              }
+          }
 }
