@@ -19,7 +19,8 @@ class sort_stack{
                if(!st2.empty()){
                    cout <<"top " << top <<endl;
                    int count = 0;
-                   while(top<st2.top()&&st2.size()){
+                   while(!st2.empty()&&(top > st2.top())){
+                       cout << "st2 top " << st2.top()<<endl;
                        st.push(st2.top());
                        st2.pop();
                        cout << "size " << st2.size() << endl;
@@ -57,7 +58,7 @@ class sort_stack{
 };
 
 int main()
-{ 
+{
     sort_stack<int> sor;
     //srand((unsigned)time(NULL));
     //for(int i=0; i<5;i++){
