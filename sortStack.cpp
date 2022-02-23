@@ -17,18 +17,18 @@ class sort_stack{
                T top = st.top();
                st.pop();
                if(!st2.empty()){
-                   cout <<"top " << top <<endl;
+                   //cout <<"top " << top <<endl;
                    int count = 0;
                    while(!st2.empty()&&(top > st2.top())){
-                       cout << "st2 top " << st2.top()<<endl;
+                       //cout << "st2 top " << st2.top()<<endl;
                        st.push(st2.top());
                        st2.pop();
-                       cout << "size " << st2.size() << endl;
+                       //cout << "size " << st2.size() << endl;
                        count++;
                    }
-                   cout << "top " << top << endl;
+                   //cout << "top " << top << endl;
                    st2.push(top);
-                   cout << "size " << st2.size() << endl;
+                   //cout << "size " << st2.size() << endl;
                    while(count>0){
                       st2.push(st.top());
                       st.pop();
@@ -60,15 +60,15 @@ class sort_stack{
 int main()
 {
     sort_stack<int> sor;
-    //srand((unsigned)time(NULL));
-    //for(int i=0; i<5;i++){
-    //    sor.push(rand());
-    //}
-    sor.push(4);
-    sor.push(5);
-    sor.push(2);
-    sor.push(0);
-    sor.push(1);
+    srand((int)time(NULL));
+    for(int i=0; i<5;i++){
+        sor.push(rand());
+    }
+    //sor.push(1070882872);
+    //sor.push(1992510720);
+    //sor.push(1008084760);
+    //sor.push(0);
+    //sor.push(1);
     sor.sort();
     sor.showElement();
     return 0;
